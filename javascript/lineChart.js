@@ -10,7 +10,7 @@ import { initializeDragHandler} from './interaction.js';
 export function drawLineChart(jsonRanking, jsonPlayers, startInterval, endInterval, grain, nPlayers)
 {
     try {
-
+        
         // filter and integrate data
         var jsonFilteredRanking = getDataForLineChart(jsonRanking, jsonPlayers, startInterval, endInterval, grain, nPlayers);
 
@@ -31,7 +31,7 @@ export function drawLineChart(jsonRanking, jsonPlayers, startInterval, endInterv
 
         // lines
         const line = addLines(x, y);
-        
+
         // color scale
         const color = getColorScale(players);
 
@@ -43,7 +43,7 @@ export function drawLineChart(jsonRanking, jsonPlayers, startInterval, endInterv
 
         // draw slider
         var slider = drawSlider(container);
-
+        
         // initialize drag handler
         initializeDragHandler(svg, slider, container, x);
 

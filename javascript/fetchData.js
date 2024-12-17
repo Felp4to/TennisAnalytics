@@ -1,7 +1,8 @@
 // fetchData.js
 
 
-export async function fetchJSONData(url) {
+export async function fetchJSONData(url)
+{
     try {
         const response = await fetch(url);
         if (!response.ok) {
@@ -17,7 +18,8 @@ export async function fetchJSONData(url) {
 
 
 // Funzione per caricare e restituire il JSON da un URL di un file CSV
-export async function loadCsvFromUrl(url) {
+export async function loadCsvFromUrl(url)
+{
     try {
         const response = await fetch(url); // Usando 'await' per attendere la risposta
         const csv = await response.text(); // Otteniamo il testo del CSV
@@ -30,7 +32,8 @@ export async function loadCsvFromUrl(url) {
 }
 
 // Funzione per convertire il CSV in JSON
-function csvToJson(csv) {
+function csvToJson(csv) 
+{
     const lines = csv.split("\n");
     const result = [];
     const headers = lines[0].split(",");
@@ -47,4 +50,5 @@ function csvToJson(csv) {
     }
     return result;
 }
+
 
