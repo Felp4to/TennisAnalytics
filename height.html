@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Visualization</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/menu.css">
+</head>
+<body>
+    
+    <!-- Menu di navigazione -->
+    <nav>
+        <ul class="menu">
+            <li class="logo"><img src="assets\icons\logo.png" alt="Logo" class="logo-img"></li>
+            <li><a href="#ranking">Ranking</a></li>
+            <li><a href="#points">Points</a></li>
+            <li><a href="#matches">Matches</a></li>
+            <li><a href="#countries">Countries</a></li>
+            <li class="logo"><img src="assets\icons\logo.png" alt="Logo" class="logo-img"></li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row mx-0">
+            <div id="container" class="col-12">
+                <svg id="histogram"></svg>
+            </div>
+        </div>
+    </div>
+    <div>
+        <!--<button class="button" id="updateButtonClay">Clay</button>
+        <button class="button" id="updateButtonGrass">Grass</button>
+        <button class="button" id="updateButtonHard">Hard</button>-->
+        <button class="button" id="updateButtonHeight">Height</button>
+        <button class="button" id="updateButtonAge">Age</button>
+        <button class="button" id="tutto">Tutto</button>
+    </div>
+    <script src="./lib/d3.v7.js"></script>
+    <script type="module" src="./javascript2/script.js"></script>
+</body>
+</html>
