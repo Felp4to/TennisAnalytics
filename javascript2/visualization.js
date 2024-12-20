@@ -4,186 +4,204 @@ import * as Constants from './constants.js';
 import * as Elements from './elements.js';
 
 
-export function drawHistogram(avgHeightForSurface, avgAgesForSurface)
-{
-    // Dati forniti per istogramma 1
-    const data1 = avgHeightForSurface["Clay"];
-    const data2 = avgHeightForSurface["Grass"];
-    data2[50] = 188;
-    const data3 = avgHeightForSurface["Hard"];
+export function drawHistogram(avgHeightForSurface, avgAgesForSurface) {
+  // Dati forniti per istogramma 1
+  const data1 = avgHeightForSurface["Clay"];
+  const data2 = avgHeightForSurface["Grass"];
+  data2[50] = 188;
+  const data3 = avgHeightForSurface["Hard"];
 
-    // dati forniti per istogramma 2
-    const dataA = avgAgesForSurface["Clay"];
-    const dataB = avgAgesForSurface["Grass"];
-    dataB[50] = 27;
-    const dataC = avgAgesForSurface["Hard"];
+  // Dati forniti per istogramma 2
+  const dataA = avgAgesForSurface["Clay"];
+  const dataB = avgAgesForSurface["Grass"];
+  dataB[50] = 27;
+  const dataC = avgAgesForSurface["Hard"];
 
-    // Impostazioni base del grafico
-    const margin = { top: 20, right: 30, bottom: 100, left: 50 };
-    const width = 1600 - margin.left - margin.right;
-    const height = 700 - margin.top - margin.bottom;
+  // Impostazioni base del grafico
+  const margin = { top: 20, right: 30, bottom: 100, left: 50 };
+  const width = 1600 - margin.left - margin.right;
+  const height = 700 - margin.top - margin.bottom;
 
-    // Anni corrispondenti ai dati
-    let currentYears = d3.range(1970, 1970 + avgHeightForSurface["Clay"].length);
+  // Anni corrispondenti ai dati
+  let currentYears = d3.range(1970, 1970 + avgHeightForSurface["Clay"].length);
 
-    // Creazione dei dati strutturati
-    let currentData = currentYears.map((year, i) => ({
-        year,
-        Clay: avgHeightForSurface["Clay"][i],
-        Grass: avgHeightForSurface["Grass"][i],
-        Hard: avgHeightForSurface["Hard"][i]
-    }));
+  // Creazione dei dati strutturati
+  let currentData = currentYears.map((year, i) => ({
+      year,
+      Clay: avgHeightForSurface["Clay"][i],
+      Grass: avgHeightForSurface["Grass"][i],
+      Hard: avgHeightForSurface["Hard"][i]
+  }));
 
-    // Aggiunta del contenitore SVG
-    const svg = d3.select("#histogram")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+  // Aggiunta del contenitore SVG
+  const svg = d3.select("#histogram")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
 
-    // Scale
-    let x0 = d3.scaleBand()
-      .domain(currentYears)
-      .range([0, width])
-      .padding(0.2);
+  // click on svg
+  //svg.on("click", function(event) {
+  //    svg.selectAll("rect").attr("opacity", 1);
+  //});
 
-    const x1 = d3.scaleBand()
-      .domain(["Clay", "Grass", "Hard"])
-      .range([0, x0.bandwidth()])
-      .padding(0.1);
+  // Scale
+  let x0 = d3.scaleBand()
+    .domain(currentYears)
+    .range([0, width])
+    .padding(0.2);
 
-    let y = d3.scaleLinear()
-      .domain([d3.min(currentData,
-         d => Math.min(d.Clay, d.Grass, d.Hard)) - 5, d3.max(currentData, d => Math.max(d.Clay, d.Grass, d.Hard))])
-      .nice()
-      .range([height, 0]);
+  const x1 = d3.scaleBand()
+    .domain(["Clay", "Grass", "Hard"])
+    .range([0, x0.bandwidth()])
+    .padding(0.1);
 
-    // Assi
-    const xAxis = svg.append("g")
-      .attr("class", "x-axis")
-      .attr("transform", `translate(0,${height})`)
-      .call(d3.axisBottom(x0).tickFormat(d => d));
+  let y = d3.scaleLinear()
+    .domain([d3.min(currentData, d => Math.min(d.Clay, d.Grass, d.Hard)) - 5, d3.max(currentData, d => Math.max(d.Clay, d.Grass, d.Hard))])
+    .nice()
+    .range([height, 0]);
 
-    const yAxis = svg.append("g")
-      .attr("class", "y-axis")
-      .call(d3.axisLeft(y));
+  // Assi
+  const xAxis = svg.append("g")
+    .attr("class", "x-axis")
+    .attr("transform", `translate(0,${height})`)
+    .call(d3.axisBottom(x0).tickFormat(d => d));
 
-    // Etichetta asse Y
-    const yAxisLabel = svg.append("text")
-      .attr("class", "y-axis-label")
-      .attr("text-anchor", "middle")
-      .attr("x", -height / 2)
-      .attr("y", -margin.left + 15)
-      .attr("transform", "rotate(-90)")
-      .text("Altezza / Età");
+  const yAxis = svg.append("g")
+    .attr("class", "y-axis")
+    .call(d3.axisLeft(y));
 
-    // Colori
-    const color = d3.scaleOrdinal()
-      .domain(["Clay", "Grass", "Hard"])
-      .range(["#D58A5B", "#A7C7A9", "#A0D6E6"]);
+  // Etichetta asse Y
+  const yAxisLabel = svg.append("text")
+    .attr("class", "y-axis-label")
+    .attr("text-anchor", "middle")
+    .attr("x", -height / 2)
+    .attr("y", -margin.left + 15)
+    .attr("transform", "rotate(-90)")
+    .text("Altezza");
 
-    // Funzione per aggiornare il grafico
-    function updateBars(newData, yDomain, newYears, yLabelText) {
-        currentData = newYears.map((year, i) => ({
-            year,
-            Clay: newData["Clay"][i],
-            Grass: newData["Grass"][i],
-            Hard: newData["Hard"][i]
-        }));
+  // Colori
+  const color = d3.scaleOrdinal()
+    .domain(["Clay", "Grass", "Hard"])
+    .range(["#D58A5B", "#A7C7A9", "#A0D6E6"]);
 
-        currentYears = newYears;
+  // Funzione per aggiornare il grafico
+  function updateBars(newData, yDomain, newYears, yLabelText) {
+      currentData = newYears.map((year, i) => ({
+          year,
+          Clay: newData["Clay"][i],
+          Grass: newData["Grass"][i],
+          Hard: newData["Hard"][i]
+      }));
 
-        x0.domain(currentYears);
-        svg.selectAll(".x-axis")
+      currentYears = newYears;
+
+      x0.domain(currentYears);
+      svg.selectAll(".x-axis")
+        .transition()
+        .duration(750)
+        .call(d3.axisBottom(x0).tickFormat(d => d));
+
+      y.domain(yDomain).nice();
+
+      svg.selectAll(".y-axis")
+        .transition()
+        .duration(750)
+        .call(d3.axisLeft(y));
+
+      svg.select(".y-axis-label")
+        .text(yLabelText);
+
+      const bars = svg.selectAll("g.bar-group")
+        .data(currentData, d => d.year);
+
+      bars.join(
+        enter => enter.append("g")
+          .attr("class", "bar-group")
+          .attr("transform", d => `translate(${x0(d.year)},0)`)
+          .selectAll("rect")
+          .data(d => ["Clay", "Grass", "Hard"].map(key => ({ key, value: d[key] })))
+          .join("rect")
+          .attr("x", d => x1(d.key))
+          .attr("y", d => y(d.value))
+          .attr("width", x1.bandwidth())
+          .attr("height", d => height - y(d.value))
+          .attr("fill", d => color(d.key)),
+
+        update => update.selectAll("rect")
+          .data(d => ["Clay", "Grass", "Hard"].map(key => ({ key, value: d[key] })))
+          .join("rect")
           .transition()
           .duration(750)
-          .call(d3.axisBottom(x0).tickFormat(d => d));
+          .attr("y", d => y(d.value))
+          .attr("height", d => height - y(d.value))
+          .attr("fill", d => color(d.key))
+      );
+  }
 
-        y.domain(yDomain).nice();
+  // Creazione delle barre iniziali
+  updateBars(avgHeightForSurface, [
+      d3.min(currentData, d => Math.min(d.Clay, d.Grass, d.Hard)) - 5,
+      d3.max(currentData, d => Math.max(d.Clay, d.Grass, d.Hard))
+  ], currentYears, "Altezza");
 
-        svg.selectAll(".y-axis")
-          .transition()
-          .duration(750)
-          .call(d3.axisLeft(y));
+  // Aggiunta etichette degli assi
+  svg.append("text")
+    .attr("text-anchor", "middle")
+    .attr("x", width / 2)
+    .attr("y", height + margin.bottom - 50)
+    .text("Anni");
 
-        svg.select(".y-axis-label")
-          .text(yLabelText);
+  // Aggiunta della leggenda
+  const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", `translate(${width / 2 - 115}, ${height + 80})`);
 
-        const bars = svg.selectAll("g.bar-group")
-          .data(currentData, d => d.year);
+  const legendItems = ["Clay", "Grass", "Hard"];
+  legend.selectAll("g")
+    .data(legendItems)
+    .join("g")
+    .attr("transform", (d, i) => `translate(${i * 100}, 0)`)
+    .call(g => {
+      g.append("rect")
+        .attr("width", 15)
+        .attr("height", 15)
+        .attr("fill", d => color(d))
+        .attr("class", "legend-rect")
+        .on("click", function(event, d) {
+            filterBars(d);
+        });
 
-        bars.join(
-          enter => enter.append("g")
-            .attr("class", "bar-group")
-            .attr("transform", d => `translate(${x0(d.year)},0)`)
-            .selectAll("rect")
-            .data(d => ["Clay", "Grass", "Hard"].map(key => ({ key, value: d[key] })))
-            .join("rect")
-            .attr("x", d => x1(d.key))
-            .attr("y", d => y(d.value))
-            .attr("width", x1.bandwidth())
-            .attr("height", d => height - y(d.value))
-            .attr("fill", d => color(d.key)),
-
-          update => update.selectAll("rect")
-            .data(d => ["Clay", "Grass", "Hard"].map(key => ({ key, value: d[key] })))
-            .join("rect")
-            .transition()
-            .duration(750)
-            .attr("y", d => y(d.value))
-            .attr("height", d => height - y(d.value))
-            .attr("fill", d => color(d.key))
-        );
-    }
-
-    // Creazione delle barre iniziali
-    updateBars(avgHeightForSurface, [
-        d3.min(currentData, d => Math.min(d.Clay, d.Grass, d.Hard)) - 5,
-        d3.max(currentData, d => Math.max(d.Clay, d.Grass, d.Hard))
-    ], currentYears, "Altezza / Età");
-
-    // Aggiunta etichette degli assi
-    svg.append("text")
-      .attr("text-anchor", "middle")
-      .attr("x", width / 2)
-      .attr("y", height + margin.bottom - 50)
-      .text("Anni");
-
-    // Aggiunta della leggenda
-    const legend = svg.append("g")
-      .attr("class", "legend")
-      .attr("transform", `translate(${width / 2 - 115}, ${height + 80})`);
-    
-    const legendItems = ["Clay", "Grass", "Hard"];
-    legend.selectAll("g")
-      .data(legendItems)
-      .join("g")
-      .attr("transform", (d, i) => `translate(${i * 100}, 0)`)
-      .call(g => {
-        g.append("rect")
-          .attr("width", 15)
-          .attr("height", 15)
-          .attr("fill", d => color(d));
-
-        g.append("text")
-          .attr("x", 20)
-          .attr("y", 12)
-          .text(d => d)
-          .attr("font-size", "12px")
-          .attr("text-anchor", "start");
-      });
-
-    document.getElementById("updateButtonHeight").addEventListener("click", function () {
-        updateBars({ Clay: data1, Grass: data2, Hard: data3 }, [
-            d3.min(data1.concat(data2).concat(data3)) - 5,
-            d3.max(data1.concat(data2).concat(data3)) + 5
-        ], d3.range(1970, 1970 + data1.length), "Altezza");
+      g.append("text")
+        .attr("x", 20)
+        .attr("y", 12)
+        .text(d => d)
+        .attr("font-size", "12px")
+        .attr("text-anchor", "start");
     });
 
-    document.getElementById("updateButtonAge").addEventListener("click", function () {
-        updateBars({ Clay: dataA, Grass: dataB, Hard: dataC }, [
-            d3.min(dataA.concat(dataB).concat(dataC)) - 1,
-            d3.max(dataA.concat(dataB).concat(dataC)) + 1
-        ], d3.range(1970, 1970 + dataA.length), "Età");
-    });
+  // Funzione per filtrare le barre
+  function filterBars(surface) {
+      svg.selectAll("rect")
+          .attr("opacity", d => d.key === surface ? 1 : (d.key ? 0.1 : 1));
+  }
+
+  // Ripristina tutte le barre
+  document.getElementById("tutto").addEventListener("click", function () {
+      svg.selectAll("rect").attr("opacity", 1);
+  });
+
+  document.getElementById("updateButtonHeight").addEventListener("click", function () {
+      updateBars({ Clay: data1, Grass: data2, Hard: data3 }, [
+          d3.min(data1.concat(data2).concat(data3)) - 5,
+          d3.max(data1.concat(data2).concat(data3)) + 5
+      ], d3.range(1970, 1970 + data1.length), "Altezza");
+  });
+
+  document.getElementById("updateButtonAge").addEventListener("click", function () {
+      updateBars({ Clay: dataA, Grass: dataB, Hard: dataC }, [
+          d3.min(dataA.concat(dataB).concat(dataC)) - 1,
+          d3.max(dataA.concat(dataB).concat(dataC)) + 1
+      ], d3.range(1970, 1970 + dataA.length), "Età");
+  });
 }
