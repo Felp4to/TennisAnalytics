@@ -1,3 +1,10 @@
 /*div {
     border: 1px solid black;
 }*/
+
+#container {
+    display: flex;
+    justify-content: center; /* Allinea orizzontalmente */
+    align-items: center; /* Allinea verticalmente */
+    height: 100vh; /* Altezza completa della pagina */
+}

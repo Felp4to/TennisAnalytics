@@ -1,7 +1,7 @@
 // script.js
 
 import { fetchJSONData } from './loadData.js';
-import { drawHistogram } from './visualization.js';
+import { drawHistogram } from './visualization2.js';
 import { calculateHeightAvgForYearCourt, calculateAgeAvgForYearCourt, countMatchesCountry } from './dataAnalysis.js';
 
 
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         var matches = await fetchJSONData('../data/matches/data.json');
 
         // calculate average age for year and surface
-        const avgAgesForSurface = calculateAgeAvgForYearCourt(matches, "Grass");
+        const avgAgesForSurface = calculateAgeAvgForYearCourt(matches);
 
         // calculate average height for year and surface
         const avgHeightForSurface = calculateHeightAvgForYearCourt(matches);
