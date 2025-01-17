@@ -1,6 +1,5 @@
 // loadData.js
 
-import * as Constants from './constants.js'
 import Match from './match.js';
 
 

@@ -10,9 +10,10 @@ function filterMatchesByCourt(matches, court)
 }
 
 // filter matches by year
-function filterMatchesByYear(matches, year)
-{
-    return matches.filter(match => match['tourney_id'].slice(0, 4) === year);
+function filterMatchesByYear(matches, year) {
+    return matches.filter(match => 
+        match['tourney_id'].slice(0, 4) === year && match['surface'] != "Carpet" && match['surface'] != ""
+    );
 }
 
 // return min year as string
@@ -125,9 +126,11 @@ export function getAllCountries(matches)
 }
 
 // count matches won for each country and for year
-export function countMatchesCountryForYear(matches, year)
+export function countMatchesCountryForYear(matches, year, court)
 {
     var filtered_matches = filterMatchesByYear(matches, String(year));
+    if(court != null)
+        filtered_matches = filterMatchesByCourt(filtered_matches, court);
     var countryDictionary = getAllCountries(matches);
     filtered_matches.forEach(match => {
         countryDictionary[match.getWinnerIoc()] += 1;
@@ -136,9 +139,8 @@ export function countMatchesCountryForYear(matches, year)
     return countryDictionary;
 }
 
-
 // return count of matches for country and year
-export function countMatchesCountry(matches)
+export function countMatchesCountry(matches, court=null)
 {
     var startIndex = getMinYear(matches);
     var stopIndex = getMaxYear(matches);
@@ -147,8 +149,24 @@ export function countMatchesCountry(matches)
 
     for(let i=0; i <= stopIndex-startIndex; i++)
     {
-        arrayYears[i] = countMatchesCountryForYear(matches, i+Number(startIndex));
+        arrayYears[i] = countMatchesCountryForYear(matches, i+Number(startIndex), court);
     }
 
     return arrayYears;
+}
+
+
+// return total matches for each year
+export function countMatchesForEveryYear(matches)
+{
+    var numMatches = [];
+    // Itera su ogni oggetto
+    matches.forEach(element => {
+        // Calcola la somma dei valori nell'oggetto corrente
+        numMatches.push(Object.values(element)
+            .filter(valore => typeof valore === 'number' && !isNaN(valore))
+            .reduce((acc, valore) => acc + valore, 0));
+    });
+
+    return numMatches;
 }

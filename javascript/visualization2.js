@@ -12,6 +12,9 @@ const height = ((screen.height * 4) / 5) - margin.top - margin.bottom;
 // array histogram data
 var arraySurfaces = null;
 
+// corrent query
+var current_query = 0;
+
 // add legend
 function addLegend(svg, currentData, x0, y) {
     const legend = svg.append("g")
@@ -173,6 +176,7 @@ export function drawHistogram(avgHeightForSurface, avgAgesForSurface)
         drawYAxis(svg, y);
         updateYAxisLabel(svg, "Height");
         drawMultipleHistogram(svg, arraySurfaces, x0, y);
+        current_query = 0;
     });
 
     // Ripristina tutte le barre
@@ -182,28 +186,29 @@ export function drawHistogram(avgHeightForSurface, avgAgesForSurface)
         drawYAxis(svg, y2);
         updateYAxisLabel(svg, "Age");
         drawMultipleHistogram(svg, arraySurfaces2, x0, y2);
+        current_query = 1;
     });
     
     // Ripristina tutte le barre
     document.getElementById("tutto").addEventListener("click", function () 
     {
         deleteBars();
-        drawMultipleHistogram(svg, avgAgesForSurface, x0, y)
+        drawMultipleHistogram(svg, avgAgesForSurface, x0, y);
     });
 
     document.getElementById("clay").addEventListener("click", function () 
     {
-        projectionSurface(svg, currentData, ["Clay"], x0, y);
+        projectionSurface(svg, (current_query === 0) ? currentData : currentData2, ["Clay"], x0, (current_query === 0) ? y : y2);
     });
 
     document.getElementById("grass").addEventListener("click", function () 
     {
-        projectionSurface(svg, currentData, ["Grass"], x0, y);
+        projectionSurface(svg, (current_query === 0) ? currentData : currentData2, ["Grass"], x0, (current_query === 0) ? y : y2);
     });
 
     document.getElementById("hard").addEventListener("click", function () 
     {
-        projectionSurface(svg, currentData, ["Hard"], x0, y);
+        projectionSurface(svg, (current_query === 0) ? currentData : currentData2, ["Hard"], x0, (current_query === 0) ? y : y2);
     });
 
 }

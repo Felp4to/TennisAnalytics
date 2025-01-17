@@ -1,37 +1,30 @@
 // script.js
 
-import { fetchJSONData } from './fetchData.js';
-import { loadCsvFromUrl } from './fetchData.js';
-import { drawLineChart } from './lineChart.js';
-import { domElements } from './domElements.js';
+import { fetchJSONData } from './loadData.js';
+import { drawHistogram } from './visualization2.js';
+import { calculateHeightAvgForYearCourt, calculateAgeAvgForYearCourt, countMatchesCountry } from './dataAnalysis.js';
 
 
-document.getElementById('form').addEventListener('submit', async function(event) {
-    event.preventDefault();
+document.addEventListener("DOMContentLoaded", async () => {
 
-    // read data form
-    var startInterVal = domElements.startInterval.value;
-    var endIntervVal = domElements.endInterval.value;
-    var nPlayersVal = domElements.nPlayers.value;
-    let grain = null;
-    
-    domElements.radios.forEach(radio => {
-        if (radio.checked) {
-            grain = radio.value;
-        }
-    });
-    
     try {
-        // read data from files
-        const jsonRanking = await fetchJSONData('./data/ranking/json/ranking_10s_clean.json');
-        const jsonPlayers = await loadCsvFromUrl('./data/players/atp_players.csv');
+        var matches = await fetchJSONData('../data/matches/data.json');
+
+        // calculate average age for year and surface
+        const avgAgesForSurface = calculateAgeAvgForYearCourt(matches);
+
+        // calculate average height for year and surface
+        const avgHeightForSurface = calculateHeightAvgForYearCourt(matches);
+
+        drawHistogram(avgHeightForSurface, avgAgesForSurface);
+
         
-        // create line chart
-        drawLineChart(jsonRanking, jsonPlayers, startInterVal, endIntervVal, grain, nPlayersVal);
-
+        // calculate matches won for earch year and country
+        const matchesWonCountryYear = countMatchesCountry(matches);
+        //alert(matchesWonCountryYear);
+        
     } catch (error) {
-        console.error('Errore durante il caricamento dei dati:', error);
+        console.error("Error fetching data:", error);
     }
-
+    
 });
-
