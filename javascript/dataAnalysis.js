@@ -1,7 +1,10 @@
 // dataAnalysis.js
 
 import * as Constants from './constants.js';
+import datapointCountries from './datapointCountries.js';
 
+
+// UTILITY FUNCTIONS
 
 // filter matches by court surface
 function filterMatchesByCourt(matches, court)
@@ -42,6 +45,10 @@ export function getMaxYear(matches) {
     return latestMatch['tourney_id'].slice(0, 4);
 }
 
+
+
+// HEIGHT and AGE FUNCTIONS
+
 // calculate average height for each year and surface
 export function calculateHeightAvgForYearCourt(matches)
 {
@@ -62,6 +69,11 @@ export function calculateHeightAvgForYearCourt(matches)
                 if(element.getWinnerHt())
                 {
                     sumHeights += Number(element.getWinnerHt());
+                    numMatches++;
+                }
+                if(element.getLoserHt())
+                {
+                    sumHeights += Number(element.getLoserHt());
                     numMatches++;
                 }
             });
@@ -94,6 +106,11 @@ export function calculateAgeAvgForYearCourt(matches)
                     sumAges += Number(element.getWinnerAge());
                     numMatches++;
                 }
+                if(element.getLoserAge())
+                {
+                    sumAges += Number(element.getLoserAge());
+                    numMatches++;
+                }
             });
             
             const avgAges = numMatches > 0 ? sumAges / numMatches : 0;
@@ -103,6 +120,10 @@ export function calculateAgeAvgForYearCourt(matches)
 
     return avgAgesForSurface;
 }
+
+
+
+// COUNTRIES FUNCTIONS
 
 // get all countries from matches
 export function getAllCountries(matches)
@@ -125,7 +146,7 @@ export function getAllCountries(matches)
     return countryDictionary;
 }
 
-// count matches won for each country and for year
+// count matches for each country and for year
 export function countMatchesCountryForYear(matches, year, court)
 {
     var filtered_matches = filterMatchesByYear(matches, String(year));
@@ -134,6 +155,7 @@ export function countMatchesCountryForYear(matches, year, court)
     var countryDictionary = getAllCountries(matches);
     filtered_matches.forEach(match => {
         countryDictionary[match.getWinnerIoc()] += 1;
+        countryDictionary[match.getLoserIoc()] += 1;
     });
     
     return countryDictionary;
@@ -155,7 +177,6 @@ export function countMatchesCountry(matches, court=null)
     return arrayYears;
 }
 
-
 // return total matches for each year
 export function countMatchesForEveryYear(matches)
 {
@@ -170,3 +191,39 @@ export function countMatchesForEveryYear(matches)
 
     return numMatches;
 }
+
+
+export function getTimeSeriesCountries(matches)
+{
+    // creo array di oggetti datapointCountries
+    var data = Array(55).fill(0);
+
+    const matchesWonCountryYearClay = countMatchesCountry(matches, "Clay");
+    const matchesWonCountryYearGrass = countMatchesCountry(matches, "Grass");
+    const matchesWonCountryYearHard = countMatchesCountry(matches, "Hard");
+
+    for(let i = 0; i < 55; i++)
+    {
+        data[i] = new datapointCountries(Constants.minYear + i);
+        data[i].setDictionary("Clay", matchesWonCountryYearClay[i]);
+        data[i].setDictionary("Grass", matchesWonCountryYearGrass[i]);
+        data[i].setDictionary("Hard", matchesWonCountryYearHard[i]);
+        //data[i].print();
+    }
+    
+    return data;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

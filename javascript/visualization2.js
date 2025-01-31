@@ -1,7 +1,6 @@
 // visualization2.js
 
 import * as Constants from './constants.js';
-import * as Elements from './elements.js';
 
 
 // Configuration for the histogram

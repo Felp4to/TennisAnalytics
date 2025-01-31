@@ -1,8 +1,8 @@
-// script2.js
+// script4.js
 
 //import * as Constants from './constants.js';
 import { fetchJSONData } from './loadData.js';
-import { drawStackedBarChart } from './visualizationCountries.js';
+import { drawStackedBarChart } from './visualizationCountries2.js';
 import { getTimeSeriesCountries, calculateHeightAvgForYearCourt } from './dataAnalysis.js';
 
 

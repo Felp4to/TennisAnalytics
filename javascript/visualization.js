@@ -1,8 +1,5 @@
 // visualization.js
 
-import * as Constants from './constants.js';
-import * as Elements from './elements.js';
-
 
 export function drawHistogram(avgHeightForSurface, avgAgesForSurface) {
   // Dati forniti per istogramma 1
