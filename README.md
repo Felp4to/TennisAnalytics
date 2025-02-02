@@ -7,11 +7,11 @@ Studente: Paolo TardioliMatricola: 571467
 
 Per visualizzare il progetto, digitare da terminale il comando:
 
-* python3 -m http.server 8000 *
+* python3 -m http.server 8000 
 
 oppure
 
-* python -m http.server 8000 *
+* python -m http.server 8000 
 
 Quindi, aprire il browser e digitare il seguente link:
 
@@ -48,20 +48,20 @@ Entrambi i dataset sono disponibili nella cartella "data" del progetto.
 
 Le seguenti query sono state definite per estrarre i dati di interesse:
 
-** Query1_A **: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni) e altezza media dei giocatori per anno.
+<b>Query1_A</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni) e altezza media dei giocatori per anno.
 
-** Query1_B **: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni).
+<b>Query1_B</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni).
 
-** QueryHeight **: Altezza media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
+<b>QueryHeight</b>: Altezza media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
 
-** QueryAge **: Età media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
+<b>QueryAge</b>: Età media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
 
 
 ### STRATEGIA DI VISUALIZZAZIONE
 
 Per rappresentare in modo efficace i risultati delle query, sono stati adottati diversi approcci grafici:
 
-** Query1_A ** e ** Query1_B **
+<b>Query1_A</b> e <b>Query1_B</b>
 
 I dati vengono visualizzati tramite un grafico a barre sovrapposte (Stacked Bar Chart) combinato con un grafico a linee (Line Chart).
 
@@ -73,7 +73,7 @@ Colori distinti per rappresentare le nazioni (non saturi per evitare eccessivo c
 
 Interattività: passando il mouse su un elemento del grafico, appare una finestra con informazioni dettagliate.
 
-** QueryHeight **
+<b>QueryHeight</b>
 
 I risultati sono rappresentati attraverso quattro grafici a linee (Line Chart):
 
@@ -81,7 +81,7 @@ Tre grafici mostrano l'altezza media dei giocatori in funzione dell'anno per cia
 
 Un quarto grafico rappresenta l'altezza media generale, indipendentemente dalla superficie.
 
-** QueryAge **
+<b>QueryAge</b>
 
 Vengono utilizzati quattro grafici a linee (Line Chart) con la stessa logica della QueryHeight:
 
