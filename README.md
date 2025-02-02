@@ -1,17 +1,18 @@
 ## PROGETTO DI VISUALIZZAZIONE DELLE INFORMAZIONI
 
-Studente: Paolo TardioliMatricola: 571467
+Studente: Paolo Tardioli
+Matricola: 571467
 
 
 ### AVVIO
 
 Per visualizzare il progetto, digitare da terminale il comando:
 
-* python3 -m http.server 8000 
+<i>python3 -m http.server 8000 </i>
 
 oppure
 
-* python -m http.server 8000 
+<i>python -m http.server 8000 </i>
 
 Quindi, aprire il browser e digitare il seguente link:
 
