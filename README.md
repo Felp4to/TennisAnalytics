@@ -1,8 +1,9 @@
-# PROGETTO DI VISUALIZZAZIONE DELLE INFORMAZIONI
+## PROGETTO DI VISUALIZZAZIONE DELLE INFORMAZIONI
 
 Studente: Paolo TardioliMatricola: 571467
 
-AVVIO
+
+### AVVIO
 
 Per visualizzare il progetto, digitare da terminale il comando:
 
@@ -16,21 +17,23 @@ Quindi, aprire il browser e digitare il seguente link:
 
 http://localhost:8000/about.html
 
-STAKEHOLDERS
+
+###STAKEHOLDERS
 
 I principali destinatari delle analisi e delle visualizzazioni sono:
 
-Giornalisti
+-Giornalisti
 
-Scrittori
+-Scrittori
 
-Telecronisti
+-Telecronisti
 
-Esperti di tennis
+-Esperti di tennis
 
 Questi utenti sono interessati a studiare l'evoluzione dello sport nel corso degli anni.
 
-DATASET
+
+###DATASET
 
 I dati utilizzati provengono da:
 
@@ -40,7 +43,8 @@ Un ulteriore dataset contenente informazioni personali sui giocatori ATP nello s
 
 Entrambi i dataset sono disponibili nella cartella "data" del progetto.
 
-QUERY
+
+###QUERY
 
 Le seguenti query sono state definite per estrarre i dati di interesse:
 
@@ -52,11 +56,12 @@ QueryHeight: Altezza media dei giocatori per anno (1970-2024), distinta per supe
 
 QueryAge: Età media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
 
-STRATEGIA DI VISUALIZZAZIONE
+
+###STRATEGIA DI VISUALIZZAZIONE
 
 Per rappresentare in modo efficace i risultati delle query, sono stati adottati diversi approcci grafici:
 
-Query1_A e Query1_B
+####Query1_A e Query1_B
 
 I dati vengono visualizzati tramite un grafico a barre sovrapposte (Stacked Bar Chart) combinato con un grafico a linee (Line Chart).
 
@@ -68,7 +73,7 @@ Colori distinti per rappresentare le nazioni (non saturi per evitare eccessivo c
 
 Interattività: passando il mouse su un elemento del grafico, appare una finestra con informazioni dettagliate.
 
-QueryHeight
+####QueryHeight
 
 I risultati sono rappresentati attraverso quattro grafici a linee (Line Chart):
 
@@ -76,7 +81,7 @@ Tre grafici mostrano l'altezza media dei giocatori in funzione dell'anno per cia
 
 Un quarto grafico rappresenta l'altezza media generale, indipendentemente dalla superficie.
 
-QueryAge
+####QueryAge
 
 Vengono utilizzati quattro grafici a linee (Line Chart) con la stessa logica della QueryHeight:
 
