@@ -16,8 +16,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         // draw line chart ages
         drawLineChart(avgAgesForSurface);
 
-
-
     } catch (error) {
         console.error("Error fetching data:", error);
     }

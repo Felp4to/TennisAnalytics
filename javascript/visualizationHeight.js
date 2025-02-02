@@ -1,19 +1,5 @@
 // visualizationHeight.js
 
-import * as Constants from './constants.js';
-
-function createSVG(margin, width, height)
-{
-    // Creazione del contenitore SVG
-    const svg = d3.select("#linechart")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
-
-    return svg
-}
 
 // Funzione per trovare il minimo tra tutti gli array
 function getMinFromArrays(...arrays) {

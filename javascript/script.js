@@ -17,13 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         // calculate average height for year and surface
         const avgHeightForSurface = calculateHeightAvgForYearCourt(matches);
 
-        //console.log(avgAgesForSurface);
-        //console.log(avgHeightForSurface);
-
         drawLineChart(avgHeightForSurface);
-
-        //drawHistogram(avgHeightForSurface, avgAgesForSurface);
-
 
     } catch (error) {
         console.error("Error fetching data:", error);
