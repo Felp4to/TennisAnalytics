@@ -22,86 +22,81 @@
             <li class="logo"><img src="assets\icons\logo.png" alt="Logo" class="logo-img"></li>
         </ul>
     </nav>
+    <div class="mx-2 px-4">
+    <p class="p-4">
+        <h2><b>PROGETTO DI VISUALIZZAZIONE DELLE INFORMAZIONI</b></h2>
+        <p>Studente: Paolo Tardioli<br>
+            Matricola: 571467</p>
+        
+        <h4>STAKEHOLDERS</h4>
 
-    <div class="container-fluid">
-        <div class="row mx-0">
-            <div id="container" class="col-12">
-                <h2>PROGETTO DI VISUALIZZAZIONE DELLE INFORMAZIONI</h2>
-                <p>Studente: Paolo Tardioli
-                    Matricola: 571467</p>
-                
-                <h4>STAKEHOLDERS</h4>
+        <p>I principali destinatari delle analisi e delle visualizzazioni sono:
+        <ul>
+            <li>Giornalisti</li>
+            <li>Scrittori</li>
+            <li>Telecronisti</li>
+            <li>Esperti di tennis</li>
+        </ul>
 
-                <p>I principali destinatari delle analisi e delle visualizzazioni sono:
-
-                -Giornalisti
-
-                -Scrittori
-
-                -Telecronisti
-
-                -Esperti di tennis
-
-                Questi utenti sono interessati a studiare l'evoluzione dello sport nel corso degli anni.</p>
+        Questi utenti sono interessati a studiare l'evoluzione dello sport nel corso degli anni.</p>
 
 
-                <h2>DATASET</h2>
+        <h4>DATASET</h4>
 
-                <p>I dati utilizzati provengono da:
+        <p>I dati utilizzati provengono da:
 
-                Un dataset che include tutti i match disputati a livello ATP dal 1970 al 2024.
+        Un dataset che include tutti i match disputati a livello ATP dal 1970 al 2024.
 
-                Un ulteriore dataset contenente informazioni personali sui giocatori ATP nello stesso periodo.
+        Un ulteriore dataset contenente informazioni personali sui giocatori ATP nello stesso periodo.
 
-                Entrambi i dataset sono disponibili nella cartella "data" del progetto.
-                </p>
+        Entrambi i dataset sono disponibili nella cartella "data" del progetto.
+        </p>
 
-                <h2>QUERY</h2>
+        <h4>QUERY</h4>
 
-                <p>Le seguenti query sono state definite per estrarre i dati di interesse:
+        <p>Le seguenti query sono state definite per estrarre i dati di interesse:
 
-                <b>Query1_A</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni) e altezza media dei giocatori per anno.
+            <p><b>Query1_A</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni) e altezza media dei giocatori per anno.</p>
 
-                <b>Query1_B</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni).
+                <p><b>Query1_B</b>: Percentuale di match giocati per anno (1970-2024), suddivisa per nazione (241 nazioni).</p>
 
-                <b>QueryHeight</b>: Altezza media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).
+                    <p><b>QueryHeight</b>: Altezza media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).</p>
 
                 <b>QueryAge</b>: Età media dei giocatori per anno (1970-2024), distinta per superficie di gioco (terra, cemento ed erba).</p>
 
 
-                <h2>STRATEGIA DI VISUALIZZAZIONE</h2>
+        <h4>STRATEGIA DI VISUALIZZAZIONE</h4>
 
-                <p>Per rappresentare in modo efficace i risultati delle query, sono stati adottati diversi approcci grafici:
+        <p>Per rappresentare in modo efficace i risultati delle query, sono stati adottati diversi approcci grafici:</p>
 
-                <b>Query1_A</b> e <b>Query1_B</b>
+        <b>Query1_A</b> e <b>Query1_B</b>
 
-                I dati vengono visualizzati tramite un grafico a barre sovrapposte (Stacked Bar Chart) combinato con un grafico a linee (Line Chart).
+        <p>I dati vengono visualizzati tramite un grafico a barre sovrapposte (Stacked Bar Chart) combinato con un grafico a linee (Line Chart).<br>
 
-                Asse X: rappresenta l'anno (1970-2024).
+        Asse X: rappresenta l'anno (1970-2024).
 
-                Due assi Y separati: mostrano rispettivamente la percentuale di match giocati e l'altezza media dei giocatori.
+        Due assi Y separati: mostrano rispettivamente la percentuale di match giocati e l'altezza media dei giocatori.<br>
 
-                Colori distinti per rappresentare le nazioni (non saturi per evitare eccessivo contrasto visivo).
+        Colori distinti per rappresentare le nazioni (non saturi per evitare eccessivo contrasto visivo).<br>
 
-                Interattività: passando il mouse su un elemento del grafico, appare una finestra con informazioni dettagliate.
+        Interattività: passando il mouse su un elemento del grafico, appare una finestra con informazioni dettagliate.</p>
 
-                <b>QueryHeight</b>
+        <b>QueryHeight</b>
 
-                I risultati sono rappresentati attraverso quattro grafici a linee (Line Chart):
+        <p>I risultati sono rappresentati attraverso quattro grafici a linee (Line Chart):<br>
 
-                Tre grafici mostrano l'altezza media dei giocatori in funzione dell'anno per ciascuna superficie (terra, cemento ed erba).
+        Tre grafici mostrano l'altezza media dei giocatori in funzione dell'anno per ciascuna superficie (terra, cemento ed erba).
 
-                Un quarto grafico rappresenta l'altezza media generale, indipendentemente dalla superficie.
+        Un quarto grafico rappresenta l'altezza media generale, indipendentemente dalla superficie.</p>
 
-                <b>QueryAge</b>
+        <b>QueryAge</b>
 
-                Vengono utilizzati quattro grafici a linee (Line Chart) con la stessa logica della QueryHeight:
+        <p>Vengono utilizzati quattro grafici a linee (Line Chart) con la stessa logica della QueryHeight:
 
-                Tre grafici mostrano l'andamento dell'età media dei giocatori per ciascuna superficie.
+        Tre grafici mostrano l'andamento dell'età media dei giocatori per ciascuna superficie.
 
-                Un quarto grafico rappresenta l'età media generale nel tempo.</p>
-            </div>
-        </div>
+        Un quarto grafico rappresenta l'età media generale nel tempo.</p>
+    </p>
     </div>
     <script src="./lib/d3.v7.js"></script>
     <script type="module" src="./javascript/script3.js"></script>

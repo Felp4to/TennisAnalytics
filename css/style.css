@@ -8,3 +8,7 @@
     align-items: center; /* Allinea verticalmente */
     height: 100vh; /* Altezza completa della pagina */
 }
+
+#about {
+    margin-left: 50px;
+}
